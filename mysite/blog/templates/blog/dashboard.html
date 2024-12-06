@@ -1,0 +1,143 @@
+{% extends 'blog/login_base.html' %}
+{% load static %}
+{% block title %}Blog List{% endblock %}
+
+
+{% block content %}
+
+<style>
+    .logout-btn-container {
+        margin-bottom: 30px; /* Adjust the space below the button */
+        padding: 20px
+    }
+
+    .logout-btn {
+        padding: 12px 25px; /* Adjust the button's padding (vertical and horizontal) */
+        font-size: 16px;     /* Adjust the font size */
+    }
+</style>
+
+<div class="logout-btn-container text-end">
+    <a href="{% url 'logout' %}" class="btn btn-danger logout-btn">Logout</a>
+</div>
+
+
+<!-- Create Post Button -->
+<div class="create-post-btn-container">
+    <a href="{% url 'create_post' %}" class="btn btn-primary">Create New Post</a>
+</div>
+<div class="container">
+    
+    <!-- Tab Navigation -->
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link {% if active_tab == 'dashboard' %}active{% endif %}" 
+               href="{% url 'dashboard' %}" 
+               role="tab" 
+               aria-selected="{% if active_tab == 'dashboard' %}true{% else %}false{% endif %}">
+               All Blogs
+            </a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link {% if active_tab == 'blog_list' %}active{% endif %}" 
+               href="{% url 'blog_list' %}" 
+               role="tab" 
+               aria-selected="{% if active_tab == 'blog_list' %}true{% else %}false{% endif %}">
+               My Blog
+            </a>
+        </li>
+    </ul>
+    
+
+    {% block dashboard_content %}
+    
+
+
+
+
+
+
+
+
+    <!-- Tab Content -->
+    <div class="tab-content mt-3" id="myTabContent">
+        <!-- Dashboard Tab (For Now, you can add other content here later) -->
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="container">
+                <h1 class="my-4">Welcome to the Dashboard</h1>
+             
+                <!-- Filter by Category -->
+                <form method="get" class="mb-4">
+                    <div class="row g-3 align-items-center">
+                        <div class="col-auto">
+                            <label for="category" class="col-form-label">Filter by Category:</label>
+                        </div>
+                        <div class="col-auto">
+                            <select id="category" name="category" class="form-select">
+                                <option value="">All Categories</option>
+                                {% for category in categories %}
+                                    <option value="{{ category.id }}" {% if category.id|stringformat:"s" == request.GET.category %}selected{% endif %}>
+                                        {{ category.name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary">Apply</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- My Blog Tab -->
+     
+    </div>
+
+
+
+    
+
+
+    <!-- Blog Posts -->
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-md-4 mb-4">
+            <a href="{% url 'blog_detail' post.id %}" style="text-decoration: none"> 
+
+                <div class="card shadow h-100">
+                    <div class="card-img-container">
+                        {% if post.image %}
+                            <img src="{{ post.image.url }}" class="card-img-top fixed-image" alt="{{ post.title }}">
+                        {% else %}
+                            <img src="{% static "/media/blog_images/blog f.png" %}" class="card-img-top fixed-image" alt="Default image">
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <p class="card-text text-muted"><strong>Category:</strong> {{ post.category.name }}</p>
+                        <p class="card-text">
+                            {% if post.content|wordcount > 10 %}
+                                {{ post.content|truncatewords:10 }} <a href="{% url 'blog_detail' post.pk %}" class="text-primary">Read More</a>
+                            {% else %}
+                                {{ post.content }}
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <small>Posted on {{ post.created_at|date:"F d, Y" }}</small>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p class="text-center">No posts found.</p>
+        </div>
+        {% endfor %}
+    </div>
+    
+    {% endblock dashboard_content %}
+
+</div>
+{% endblock %}

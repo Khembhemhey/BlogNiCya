@@ -1,0 +1,20 @@
+<!-- comment_view.html -->
+
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h2>Comments</h2>
+
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Comment</button>
+  </form>
+
+  <h3>All Comments:</h3>
+  <ul>
+    {% for comment in comments %}
+      <li><strong>{{ comment.user.username }}</strong> said: {{ comment.content }} ({{ comment.created_at }})</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

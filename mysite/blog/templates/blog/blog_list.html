@@ -1,0 +1,123 @@
+{% extends 'blog/dashboard.html' %}
+{% load static %}
+
+{% block dashboard_content %}
+<!-- Create Post Button -->
+{% comment %} <div class="create-post-btn-container">
+    <a href="{% url 'create_post' %}" class="btn btn-primary">Create New Post</a>
+</div> {% endcomment %}
+
+<!-- Categories -->
+<section class="categories">
+    <a href="{% url 'blog_list' %}">All</a>
+    {% for category in categories %}
+        <a href="?category={{ category.id }}">{{ category.name }}</a>
+    {% endfor %}
+</section>
+
+<!-- Blog Grid -->
+<div class="blog-grid">
+    {% for post in blog_list %}
+    <div class="blog-card">
+        {% if post.image %}
+            <img src="{{ post.image.url }}" alt="{{ post.title }}" class="blog-image">
+        {% else %}
+            <img src="/media/blog_images/blog f.png" alt="Default image" class="blog-image">
+        {% endif %}
+        <h2>{{ post.title }}</h2>
+        <p><strong>Category:</strong> {{ post.category.name }}</p>
+        
+        <!-- Check if the content is longer than 10 words -->
+        <p class="content">
+            {% if post.content|wordcount > 10 %}
+                {{ post.content|truncatewords:10 }} <span class="more-text">...more</span>
+            {% else %}
+                {{ post.content }}
+            {% endif %}
+        </p>
+
+        <div class="button-container">
+            <a href="{% url 'blog_detail' post.id %}" class="btn btn-primary">Read More</a>
+
+            <!-- Edit Button with Icon -->
+            <a href="{% url 'update_post' post.id %}" class="btn btn-edit">
+                <i class="fas fa-pencil-alt"></i> Edit
+            </a>
+
+            <!-- Delete Button with Icon -->
+            <button type="button" class="btn btn-danger" onclick="openDeleteModal({{ post.id }})">
+                <i class="fas fa-trash"></i> Delete
+            </button>
+            
+        </div>
+    </div>
+    </a>
+    {% endfor %}
+</div>
+
+<!-- Pagination Controls -->
+<!-- <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div> -->
+<br>
+<!-- Modal Structure -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Deleting this post will permanently remove it from your blog. Are you sure you want to continue?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, Keep Post</button>
+                <form id="deleteForm" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Yes, Delete Post</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+<!-- JavaScript for Modal -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function openDeleteModal(postId) {
+        // Update the form's action to include the correct post ID for deletion
+        const form = document.getElementById('deleteForm');
+        form.action = `/${postId}/delete/`; // Update this URL as per your routing
+
+        // Open the modal
+        var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        deleteModal.show();
+    }
+</script>
+
+
+
+
+{% endblock dashboard_content %}
+
+
+
+
+
+

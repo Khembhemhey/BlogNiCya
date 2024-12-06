@@ -1,0 +1,95 @@
+{% extends 'blog/login_base.html' %}
+
+{% load static %}
+{% block content %}
+<style>
+    /* Centering the content */
+    .blog-detail-container {
+        text-align: center;
+    }
+
+    /* Adjust the width of the image */
+    .blog-image-detail {
+        max-width: 100%;
+        height: auto;
+        margin: 20px 0;
+    }
+
+    /* Category styling */
+    .blog-detail-category {
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    /* Edit Post button styling */
+    .edit-btn-container {
+        margin-bottom: 20px;
+    }
+
+    /* Comment styling */
+    .comments-section {
+        margin-top: 40px;
+    }
+    .comment {
+        border-bottom: 1px solid #ccc;
+        padding: 10px 0;
+    }
+    .comment-content {
+        margin-bottom: 5px;
+    }
+</style>
+
+<div class="container-fluid">
+    <!-- Back to Blog List Button -->
+    <div class="blog-detail-container">
+        <div class="back-button-container">
+            <a href="{% url 'blog_list' %}" class="btn btn-edit">← Back to Blog List</a>
+        </div>
+        <!-- Edit Post Button -->
+        {% comment %} <div class="edit-btn-container">
+            <a href="{% url 'update_post' blog_detail.id %}" class="btn btn-edit">
+                <i class="fas fa-pencil-alt"></i> Edit Post
+            </a>
+        </div> {% endcomment %}
+
+        <!-- Title -->
+        <h1>{{ blog_detail.title }}</h1>
+
+        <!-- Category -->
+        <p class="blog-detail-category"><strong>Category:</strong> {{ blog_detail.category.name }}</p>
+
+        <!-- Image -->
+        {% if blog_detail.image %}
+            <img src="{{ blog_detail.image.url }}" alt="{{ blog_detail.title }}" class="blog-image-detail">
+        {% endif %}
+
+        <!-- Content -->
+        <p>{{ blog_detail.content }}</p>
+        <div class="comments-section">
+            <h3>Comments</h3>
+    
+            <!-- Display Comments -->
+            {% for comment in comments %}
+                <div class="comment">
+                    <strong>{{ comment.user.username }}</strong> ({{ comment.created_at|date:"F j, Y, g:i a" }})
+                    <p class="comment-content">{{ comment.content }}</p>
+                </div>
+            {% empty %}
+                <p>No comments yet. Be the first to comment!</p>
+            {% endfor %}
+    
+            <!-- Add Comment Form -->
+            <h4>Add a Comment</h4>
+            <form method="post">
+                {% csrf_token %}
+                {{ comment_form.as_p }}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Comments Section -->
+  
+</div>
+
+{% endblock content %}

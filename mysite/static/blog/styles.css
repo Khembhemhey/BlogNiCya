@@ -1,0 +1,452 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #D9ECFF; /* Slightly darker light blue background */
+    color: #333;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #336699; /* Dark blue for header */
+    padding: 20px;
+    color: white;
+}
+
+header h1 {
+    font-size: 24px;
+    color: white;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+}
+
+header nav ul li {
+    margin-right: 20px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+header nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Categories */
+.categories {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.categories a {
+    text-decoration: none;
+    padding: 10px;
+    background-color: #99CCFF; /* Light blue for category buttons */
+    border-radius: 5px;
+    color: #333;
+}
+
+.categories a:hover {
+    background-color: #6699CC; /* Hover effect */
+}
+
+/* Blog Grid */
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.blog-card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Ensure the card fills the height */
+}
+
+.blog-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.blog-card h2 {
+    margin: 10px 0;
+    color: #336699; /* Dark blue for titles */
+}
+
+/* Limit the content shown in the blog card */
+.blog-card p.content {
+    color: #666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit content to 2 lines for visibility */
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+    margin-bottom: 20px;
+}
+
+.blog-card a.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #336699; /* Dark blue for buttons */
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.blog-card a.btn:hover {
+    background-color: #6699CC; /* Hover effect */
+}
+
+/* Ensure buttons align at the bottom */
+.button-container {
+    margin-top: auto; /* Pushes the buttons to the bottom of the card */
+}
+
+.button-container a,
+.button-container button {
+    width: 100%; /* Ensure all buttons have the same width */
+    text-align: center;
+    margin-bottom: 10px; /* Spacing between buttons */
+}
+
+.button-container a:last-child,
+.button-container button:last-child {
+    margin-bottom: 0;
+}
+
+.btn-edit {
+    background-color: #336699 !important; /* Dark blue for edit button */
+    color: white !important;
+}
+
+.btn-edit:hover {
+    background-color: #6699CC; /* Hover effect for edit button */
+}
+
+.btn-delete {
+    background-color: #FF4D4D; /* Red for delete button */
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #E60000; /* Darker red on hover */
+}
+
+/* Back Link */
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #336699;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* Blog Detail Styling */
+.blog-detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.blog-image-detail {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #336699; /* Dark blue for titles */
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 10px;
+    background-color: #336699; /* Dark blue for footer */
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Back Button Styling */
+.back-button-container {
+    place-self: start;
+    margin-top: 12px;
+    margin-left: 12px;
+}
+
+.btn-back {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #336699; /* Dark blue for back button */
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-back:hover {
+    background-color: #6699CC; /* Hover effect for back button */
+}
+
+/* Form Container */
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Styling */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input[type="text"],
+textarea,
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+textarea {
+    height: 150px;
+}
+
+
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #336699; /* Dark blue for buttons */
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #6699CC; /* Hover effect */
+}
+
+/* Edit Button */
+.btn-edit {
+    background-color: #336699; /* Dark blue for edit button */
+    color: white;
+}
+
+.btn-edit:hover {
+    background-color: #6699CC; /* Hover effect for edit button */
+}
+
+/* Delete Button */
+.btn-delete {
+    background-color: #FF4D4D !important; /* Red for delete button */
+    color: white !important; /* Force white text color */
+    margin-top: 5px;
+    visibility: visible; /* Make sure it's visible */
+    opacity: 1; /* Full opacity */
+}
+
+.btn-delete:hover {
+    background-color: #E60000 !important; /* Darker red on hover */
+    opacity: 1 !important; /* Full opacity on hover */
+}
+
+
+/* Blog Card */
+.blog-card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Ensure the card fills the height */
+}
+
+/* Create Post Button */
+.create-post-btn-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.create-post-btn-container .btn {
+    padding: 15px 30px;
+    background-color: #4CAF50; /* Aesthetic green color */
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow */
+}
+
+.create-post-btn-container .btn:hover {
+    background-color: #45a049; /* Darker green for hover */
+    transform: translateY(-2px); /* Slight lift on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}
+
+.create-post-btn-container .btn:active {
+    transform: translateY(1px); /* Slight depress when clicked */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Lessen shadow when clicked */
+}
+
+.btn i {
+    margin-right: 5px; /* Add spacing between icon and text */
+}
+
+/* Floating Action Button (FAB) */
+.fab-container {
+    position: fixed;
+    bottom: 20px;
+    right: 50%;
+    transform: translateX(50%); /* Centers the button horizontally */
+    z-index: 1000; /* Ensures the button appears on top */
+}
+
+.fab-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 25px;
+    background-color: #007BFF; /* Blue background color */
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 50px; /* Rounded corners */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2); /* Shadow for the floating effect */
+    text-decoration: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    position: relative;
+}
+
+.fab-btn i {
+    margin-left: 10px; /* Space between text and icon */
+    font-size: 1.5rem; /* Adjust icon size */
+}
+
+/* Hover and Active Effects */
+.fab-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+    transform: translateY(-3px); /* Lift effect on hover */
+}
+
+.fab-btn:active {
+    transform: translateY(2px); /* Slight press effect on click */
+}
+
+/* Modal Footer Button Styles */
+.modal-footer .btn-secondary {
+    background-color: #CCCCCC; /* Light grey */
+    color: #333;
+}
+
+.modal-footer .btn-danger {
+    background-color: #FF4D4D;
+}
+
+.modal-footer .btn-danger:hover {
+    background-color: #E60000;
+}
+
+/* Custom Cancel Button Style */
+.btn-cancel {
+    background-color: #CCCCCC; /* Light grey for cancel button */
+    color: #333;
+    border-radius: 5px;
+}
+
+.btn-cancel:hover {
+    background-color: #999999; /* Darker grey on hover */
+}
+
+@media (max-width: 768px) {
+    .blog-grid {
+        grid-template-columns: 1fr;  /* Single column layout on smaller screens */
+    }
+}
+
+
+.card-img-container {
+    overflow: hidden; /* Ensure no overflow for images */
+}
+
+.fixed-image {
+    height: 200px; /* Set a fixed height for images */
+    object-fit: cover; /* Ensures the image fills the area while maintaining aspect ratio */
+    width: 100%; /* Make sure the image spans the card width */
+}
+
+
+.card-img-container {
+    size: 10px 30px;
+}
